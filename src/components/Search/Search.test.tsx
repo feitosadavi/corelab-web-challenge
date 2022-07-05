@@ -17,4 +17,10 @@ describe('Search component tests', () => {
     const placeHolderText = screen.queryByPlaceholderText(/placeholder_text/i)
     expect(placeHolderText).toBeInTheDocument();
   });
+  test('should Search have the same value passed throught props', () => {
+    const sut = makeSut()
+    render(sut);
+    const search = screen.getByTestId('search')
+    expect(search).toHaveValue('search_value')
+  });
 });
