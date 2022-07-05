@@ -11,6 +11,11 @@ describe('Card component tests', () => {
     const card = screen.getByTestId('card')
     expect(card).toBeInTheDocument();
   });
+  test('should Card display vehicles name', () => {
+    render(<Card vehicle={vehicles[0]} title='card_title' />);
+    const vehiclesName = screen.getByText(vehicles[0].name)
+    expect(vehiclesName).toBeInTheDocument();
+  });
   test('should Card display vehicles price', () => {
     render(<Card vehicle={vehicles[0]} title='card_title' />);
     const vehiclesPrice = screen.getByText(vehicles[0].price)
