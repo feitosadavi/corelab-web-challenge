@@ -9,4 +9,9 @@ describe('Card component tests', () => {
     const card = screen.getByTestId('card')
     expect(card).toBeInTheDocument();
   });
+  test('should Card display the title passed throught props', () => {
+    render(<Card children={'children'} title='card_title' />);
+    const cardTitle = screen.getByText('card_title')
+    expect(cardTitle).toBeInTheDocument();
+  });
 });
