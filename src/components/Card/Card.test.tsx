@@ -2,21 +2,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from '.';
+import { mockVehicles } from 'types/Vehicle.mock';
 
 describe('Card component tests', () => {
+  const vehicles = mockVehicles()
   test('should Card be in the document', () => {
-    render(<Card children={'children'} title='card_title' />);
+    render(<Card vehicle={vehicles[0]} title='card_title' />);
     const card = screen.getByTestId('card')
     expect(card).toBeInTheDocument();
   });
-  test('should Card display the title passed throught props', () => {
-    render(<Card children={'children'} title='card_title' />);
-    const cardTitle = screen.getByText('card_title')
-    expect(cardTitle).toBeInTheDocument();
-  });
-  test('should Card display the children passed throught props', () => {
-    render(<Card children={<div>children</div>} title='card_title' />);
-    const children = screen.getByText('children')
-    expect(children).toBeInTheDocument();
+  test('should Card display vehicles price', () => {
+    render(<Card vehicle={vehicles[0]} title='card_title' />);
+    const vehiclesPrice = screen.getByText(vehicles[0].price)
+    expect(vehiclesPrice).toBeInTheDocument();
   });
 });
