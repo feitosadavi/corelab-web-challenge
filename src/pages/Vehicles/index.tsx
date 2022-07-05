@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getVehicles } from "../../lib/api";
-import { Button, Card, Search } from "../../components";
+
+import { Button, Card, Search } from 'components/';
+import { getVehicles } from 'lib/api';
+import { IVehicle } from "types/Vehicle";
+
 import styles from "./Vehicles.module.scss";
-import { IVehicle } from "../../types/Vehicle";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
