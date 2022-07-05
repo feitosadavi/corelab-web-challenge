@@ -21,4 +21,9 @@ describe('Card component tests', () => {
     const vehiclesPrice = screen.getByText(vehicles[0].price)
     expect(vehiclesPrice).toBeInTheDocument();
   });
+  test('should Card display vehicles description', () => {
+    render(<Card vehicle={vehicles[0]} title='card_title' />);
+    const vehiclesDescription = screen.getByText(vehicles[0].description)
+    expect(vehiclesDescription).toBeInTheDocument();
+  });
 });
