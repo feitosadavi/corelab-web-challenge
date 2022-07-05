@@ -26,4 +26,9 @@ describe('Card component tests', () => {
     const vehiclesDescription = screen.getByText(vehicles[0].description)
     expect(vehiclesDescription).toBeInTheDocument();
   });
+  test('should Card display vehicles year', () => {
+    render(<Card vehicle={vehicles[0]} title='card_title' />);
+    const vehiclesYear = screen.getByText(vehicles[0].year)
+    expect(vehiclesYear).toBeInTheDocument();
+  });
 });
