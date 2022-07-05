@@ -1,17 +1,28 @@
-import React, { ReactNode } from "react";
+import React from "react";
+
+import { IVehicle } from 'types/'
+
 import styles from "./Card.module.scss";
+
+
+type OmitFields = 'createdAt' | 'color' | 'isFavorite' | 'plate' | 'id'
+type CardVehicle = Omit<IVehicle, OmitFields>
 
 interface ICard {
   title: string;
-  children: ReactNode;
+  vehicle: CardVehicle;
 }
 
-const Card = (props: ICard) => {
+const Card = ({ vehicle }: ICard) => {
   return (
     <div data-testid='card' className={styles.Card}>
-      <h2>{props.title}</h2>
+      <h2>{vehicle.name}</h2>
 
-      <div className={styles.content}>{props.children}</div>
+      <div className={styles.content}>
+        <p>{vehicle.price}</p>
+        <p>{vehicle.description}</p>
+        <p>{vehicle.year}</p>
+      </div>
     </div>
   );
 };

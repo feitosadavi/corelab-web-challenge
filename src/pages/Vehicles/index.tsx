@@ -5,6 +5,7 @@ import { getVehicles } from 'lib/api';
 import { IVehicle } from "types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
+import { mockVehicles } from 'types/Vehicle.mock';
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -30,11 +31,7 @@ const VehiclesPage = () => {
 
         <Button text="Add new vehicle" onClick={() => {}} />
 
-        <Card title="Sandero Stepway">
-          <p>Price: 22000</p>
-          <p>Description: Carro usado por 2 anos...</p>
-          <p>Year: 2018</p>
-        </Card>
+        <Card title="Sandero Stepway" vehicle={mockVehicles()[0]} />
       </main>
     </div>
   );
