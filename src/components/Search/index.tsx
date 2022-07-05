@@ -1,7 +1,7 @@
 interface ISearch {
   placeholder: string;
   value: string;
-  onChange: () => void;
+  onChange: (e?: any) => void;
 }
 
 const Search = (props: ISearch) => {
