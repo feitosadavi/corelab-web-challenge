@@ -5,7 +5,7 @@ describe('Vehicles page', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('displays two todo items by default', () => {
+  it('should change search input value on search ', () => {
     cy.get('input').should('be.empty')
     cy.get('input').type('any_value')
     cy.get('input').should('have.value', 'any_value')
