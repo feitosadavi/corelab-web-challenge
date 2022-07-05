@@ -8,7 +8,7 @@ interface ICard {
 
 const Card = (props: ICard) => {
   return (
-    <div className={styles.Card}>
+    <div data-testid='card' className={styles.Card}>
       <h2>{props.title}</h2>
 
       <div className={styles.content}>{props.children}</div>
