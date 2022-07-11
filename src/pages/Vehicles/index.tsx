@@ -29,7 +29,7 @@ const VehiclesPage = () => {
       <main className={styles.main}>
         <Search placeholder="Search" value={search} onChange={handleSearchChange} />
 
-        <Button text="Add new vehicle" onClick={() => navigate('/add-vehicle')} />
+        <Button id='add-vehicle-btn' text="Add new vehicle" onClick={() => navigate('/add-vehicle')} />
 
         {vehicles.map(vehicle => (
           <Card key={vehicle.id} title="Sandero Stepway" vehicle={vehicle} />
