@@ -18,8 +18,15 @@ const AddVehicle = () => {
   const AddVehicleSchema = Yup.object().shape({
     name: Yup.string().required(REQUIRED_FIELD_MSG),
     brand: Yup.string().required(REQUIRED_FIELD_MSG),
-    color: Yup.string().matches(onlyAlphabeticAllowed, { message: NOT_ALLOWED_NON_ALPHA_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG),
-    year: Yup.string().matches(onlyFourDigitsAllowed, { message: ONLY_FIVE_NUMERIC_DIGITS_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG)
+    description: Yup.string(),
+    plate: Yup.string().required(REQUIRED_FIELD_MSG),
+    price: Yup.number(),
+    color: Yup.string()
+      .matches(onlyAlphabeticAllowed, { message: NOT_ALLOWED_NON_ALPHA_MSG, excludeEmptyString: true })
+      .required(REQUIRED_FIELD_MSG),
+    year: Yup.string()
+      .matches(onlyFourDigitsAllowed, { message: ONLY_FIVE_NUMERIC_DIGITS_MSG, excludeEmptyString: true })
+      .required(REQUIRED_FIELD_MSG)
   })
 
   const onSubmit = async (values: any) => {
@@ -101,7 +108,13 @@ const AddVehicle = () => {
               </sub>
             </React.Fragment>))}
             <label htmlFor="description">Descrição</label>
-            <textarea name="description" id="description" onChange={handleChange} value={values.description} cols={30} rows={10}></textarea>
+            <textarea
+              name="description"
+              id="description"
+              onChange={handleChange}
+              value={values.description}
+              cols={30}
+              rows={10}>{values.description}</textarea>
             <button type="submit">Salvar</button>
           </div>
         </form>
