@@ -5,7 +5,7 @@ import { Button, Card, Search } from 'components/';
 import styles from "./Vehicles.module.scss";
 import { IVehicle } from 'types/';
 import { getVehicles } from 'lib/api';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const VehiclesPage = () => {
   const navigate = useNavigate()

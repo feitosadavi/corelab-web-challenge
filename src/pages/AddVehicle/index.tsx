@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from '/home/eu/Documents/codelab/corelab-web-challenge/src/pages/AddVehicle/AddVehicle.module.scss'
 import { addVehicle } from 'lib/api'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 const onlyFourDigitsAllowed = /\b\d{4}\b/
 const onlyAlphabeticAllowed = /^[A-Za-z]+$/

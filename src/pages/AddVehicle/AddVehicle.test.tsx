@@ -1,11 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import AddVehicle from '.';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('AddVehicle component tests', () => {
   const makeSut = () => {
-
-    return (<AddVehicle />)
+    return (
+      <BrowserRouter>
+        <AddVehicle />
+      </BrowserRouter>
+    )
   }
 
   test('should ano input be in the document', () => {
