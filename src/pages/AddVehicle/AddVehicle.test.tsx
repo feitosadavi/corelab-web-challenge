@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import AddVehicle from '.';
-import userEvent from '@testing-library/user-event';
 
 describe('AddVehicle component tests', () => {
   const makeSut = () => {
