@@ -4,21 +4,23 @@ import { Button, Card, Search } from 'components/';
 
 import styles from "./Vehicles.module.scss";
 import { mockVehicles } from 'types/Vehicle.mock';
+import { IVehicle } from 'types/';
+import { getVehicles } from 'lib/api';
 
 const VehiclesPage = () => {
-  // const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
-  // useEffect(() => {
-  //   const fetchVehicles = async () => {
-  //     const payload = await getVehicles();
-  //     setVehicles(payload);
-  //   };
+  React.useEffect(() => {
+    const fetchVehicles = async () => {
+      const payload = await getVehicles();
+      setVehicles(payload);
+    };
 
-  //   fetchVehicles();
-  // }, []);
+    fetchVehicles();
+  }, []);
 
 
   return (
@@ -28,7 +30,9 @@ const VehiclesPage = () => {
 
         <Button text="Add new vehicle" onClick={() => {}} />
 
-        <Card title="Sandero Stepway" vehicle={mockVehicles()[0]} />
+        {vehicles.map(vehicle => (
+          <Card key={vehicle.id} title="Sandero Stepway" vehicle={vehicle} />
+        ))}
       </main>
     </div>
   );

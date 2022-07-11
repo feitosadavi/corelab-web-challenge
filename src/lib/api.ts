@@ -1,4 +1,4 @@
-const API = "http://localhost:3333";
+const API = "https://corelab-api-challenge.herokuapp.com";
 
 const endpoint = (path: string): string => API + path;
 
