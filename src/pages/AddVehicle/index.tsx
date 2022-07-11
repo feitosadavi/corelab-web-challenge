@@ -3,52 +3,88 @@ import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from '/home/eu/Documents/codelab/corelab-web-challenge/src/pages/AddVehicle/AddVehicle.module.scss'
+import { addVehicle } from 'lib/api'
+import { useNavigate } from 'react-router'
 
 const onlyFourDigitsAllowed = /\b\d{4}\b/
 const onlyAlphabeticAllowed = /^[A-Za-z]+$/
 const REQUIRED_FIELD_MSG = 'Campo obrigatório'
 const NOT_ALLOWED_NON_ALPHA_MSG = 'Somente letras'
 const ONLY_FIVE_NUMERIC_DIGITS_MSG = 'Precisa ter exatamente 5 dígitos númericos'
+
 const AddVehicle = () => {
+  const navigate = useNavigate()
+
   const AddVehicleSchema = Yup.object().shape({
-    marca: Yup.string().required(REQUIRED_FIELD_MSG),
-    cor: Yup.string().matches(onlyAlphabeticAllowed, { message: NOT_ALLOWED_NON_ALPHA_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG),
-    ano: Yup.string().matches(onlyFourDigitsAllowed, { message: ONLY_FIVE_NUMERIC_DIGITS_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG)
+    name: Yup.string().required(REQUIRED_FIELD_MSG),
+    brand: Yup.string().required(REQUIRED_FIELD_MSG),
+    color: Yup.string().matches(onlyAlphabeticAllowed, { message: NOT_ALLOWED_NON_ALPHA_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG),
+    year: Yup.string().matches(onlyFourDigitsAllowed, { message: ONLY_FIVE_NUMERIC_DIGITS_MSG, excludeEmptyString: true }).required(REQUIRED_FIELD_MSG)
   })
 
-  const onSubmit = (values: any) => console.log({ ...values, ano: Number(values.ano) }) // convert ano into a number
+  const onSubmit = async (values: any) => {
+    const payload = await addVehicle(values)
+    console.log(payload)
+    if (payload.id) navigate('/home')
+    else console.error('Houve um erro ao adicionar um novo carro')
+  }
 
   const { errors, handleSubmit, handleChange, values } = useFormik({
     initialValues: {
-      marca: '',
-      cor: '',
-      ano: '',
+      name: '',
+      brand: '',
+      color: '',
+      year: '',
+      plate: '',
+      description: '',
+      price: 0,
     },
     validationSchema: AddVehicleSchema,
     onSubmit: onSubmit
   });
 
   const inputs = [{
-    id: 'marca',
+    id: 'name',
+    label: 'Name',
+    name: 'name',
+    type: 'text',
+    onChange: handleChange,
+    value: values.name
+  }, {
+      id: 'brand',
     label: 'Marca',
-    name: 'marca',
+    name: 'brand',
     type: 'text',
     onChange: handleChange,
-    value: values.marca
+    value: values.brand
   }, {
-    id: 'cor',
-    label: 'Cor',
-    name: 'cor',
+      id: 'price',
+      label: 'Preço',
+      name: 'price',
+      type: 'number',
+      onChange: handleChange,
+      value: values.price
+    }, {
+      id: 'color',
+      label: 'Cor',
+    name: 'color',
     type: 'text',
     onChange: handleChange,
-    value: values.cor
-  }, {
-    id: 'ano',
+      value: values.color
+    }, {
+    id: 'year',
     label: 'Ano',
-    name: 'ano',
+    name: 'year',
     type: 'text',
     onChange: handleChange,
-    value: values.ano
+      value: values.year
+    }, {
+      id: 'plate',
+      label: 'Placa',
+      name: 'plate',
+      type: 'text',
+      onChange: handleChange,
+      value: values.plate
   }]
 
   return (
@@ -59,11 +95,13 @@ const AddVehicle = () => {
           <div className={styles.inputGroup}>
             {inputs.map(({ id, label, name, type, onChange, value }) => (<React.Fragment key={id}>
               <label htmlFor={id}>{label}</label>
-              <input key={id} id={id} name={name} type={type} onChange={onChange} />
+              <input key={id} id={id} name={name} type={type} value={value} onChange={onChange} />
               <sub id={`msg-for-${id}`}>
                 {(errors as any)[id]}
               </sub>
             </React.Fragment>))}
+            <label htmlFor="description">Descrição</label>
+            <textarea name="description" id="description" onChange={handleChange} value={values.description} cols={30} rows={10}></textarea>
             <button type="submit">Salvar</button>
           </div>
         </form>
