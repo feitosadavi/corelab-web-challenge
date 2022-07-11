@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { Button, Card, Search } from 'components/';
 
 import styles from "./Vehicles.module.scss";
-import { mockVehicles } from 'types/Vehicle.mock';
 import { IVehicle } from 'types/';
 import { getVehicles } from 'lib/api';
+import { useNavigate } from 'react-router';
 
 const VehiclesPage = () => {
+  const navigate = useNavigate()
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>("");
 
@@ -28,7 +29,7 @@ const VehiclesPage = () => {
       <main className={styles.main}>
         <Search placeholder="Search" value={search} onChange={handleSearchChange} />
 
-        <Button text="Add new vehicle" onClick={() => {}} />
+        <Button text="Add new vehicle" onClick={() => navigate('/add-vehicle')} />
 
         {vehicles.map(vehicle => (
           <Card key={vehicle.id} title="Sandero Stepway" vehicle={vehicle} />
